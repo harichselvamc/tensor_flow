@@ -22,6 +22,10 @@ def create_folders():
 async def generate_image(prompt: str = "cartoon portrait", image: UploadFile = File(...), num_steps: int = 100):
     # Save the uploaded image
     img = Image.open(io.BytesIO(await image.read()))
+
+    # Convert RGBA to RGB mode
+    img = img.convert("RGB")
+    
     img.save("input_image.jpeg")
 
     # Generate the modified image
